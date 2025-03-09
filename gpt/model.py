@@ -73,7 +73,7 @@ class CausalSelfAttention(nn.Module):
 
         attn = attn @ v
 
-        attn = attn.transpose(1, 2).contiguous().view(B, T, C)
+        attn = attn.reshape(B, T, C)
 
         y_hat = self.resid_dropout(self.c_proj(attn))
 
