@@ -56,7 +56,7 @@ class CausalSelfAttention(nn.Module):
 
         # TODO: implement the forward pass of the casual self-attention layer.
 
-        causal_mask_expanded = self.causal_mask.expand(B, self.n_head, T, T)
+        causal_mask_expanded = self.causal_mask[:, :, :T, :T].expand(B, self.n_head, T, T)
         
         qkv = self.c_attn(x)
         q, k, v = qkv.chunk(3, dim=-1)
